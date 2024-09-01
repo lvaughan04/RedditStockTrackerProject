@@ -1,0 +1,36 @@
+scalar DateTime
+  @specifiedBy(url: 
+    "https://scalars.graphql.org/andimarek/date-time.html"
+  )
+scalar Date
+  @specifiedBy(url: 
+    "https://tools.ietf.org/html/rfc3339"
+  )
+
+type Query{
+    stockById(id: ID): Stock
+}
+
+type Stock{
+    id: ID!
+    symbol: String!
+    security: String!
+    gicsSector: String
+    gicsSubIndustry: String
+    headLocation: String
+    dateAdded: Date
+    cik : Int
+    founded: Int
+}
+
+type Post{
+    id : ID!
+    timestamp: DateTime!
+    stockReferences: [ID!]! 
+    subreddit: String!
+    author: String!
+    title: String!
+    body: String!
+    url: String! 
+}
+
