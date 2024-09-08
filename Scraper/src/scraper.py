@@ -56,6 +56,7 @@ def check_for_stock(submission):
 def process_subreddit(subreddit, time_ago, posts_collection):
     last_post_ID = None
     
+    
     for i, submission in enumerate(subreddit.new(limit=100, params={'after': last_post_ID})):
         submission_time = datetime.fromtimestamp(submission.created_utc)
 

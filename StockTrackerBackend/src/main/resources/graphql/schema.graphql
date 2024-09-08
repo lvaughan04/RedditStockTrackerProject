@@ -8,6 +8,7 @@ scalar Date
   )
 
 type Query{
+    getStocks(): [Stock!]!
     stockById(id: ID): Stock
 }
 
