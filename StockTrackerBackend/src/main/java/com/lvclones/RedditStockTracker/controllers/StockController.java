@@ -1,9 +1,7 @@
 package com.lvclones.RedditStockTracker.controllers;
 
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 import com.lvclones.RedditStockTracker.models.Stock;
 import java.util.List;

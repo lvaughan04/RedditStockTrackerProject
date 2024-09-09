@@ -3,10 +3,7 @@ package com.lvclones.RedditStockTracker.services;
 import org.springframework.stereotype.Service;
 import com.lvclones.RedditStockTracker.repositories.StockRepository;
 import org.bson.types.ObjectId;
-
-
 import java.util.List;
-
 import com.lvclones.RedditStockTracker.models.Stock;
 
 @Service
