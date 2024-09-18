@@ -1,7 +1,5 @@
 package com.lvclones.RedditStockTracker.services;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.lvclones.RedditStockTracker.repositories.StockRepository;
 import org.bson.types.ObjectId;
