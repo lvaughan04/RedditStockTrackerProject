@@ -8,8 +8,11 @@ scalar Date
   )
 
 type Query{
-    getStocks: [Stock!]!
-    stockById(id: ID): Stock!
+    getAllStocks: [Stock]
+    getStockById(id: String!): Stock
+    getStockBySymbol(symbol: String!) : Stock
+    getPostsBySubreddit(subreddit : String!) : [Post]
+    getAllPosts: [Post]
 }
 
 type Stock{

@@ -1,5 +1,7 @@
 package com.lvclones.RedditStockTracker.services;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.lvclones.RedditStockTracker.repositories.StockRepository;
 import org.bson.types.ObjectId;
@@ -15,12 +17,16 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    public List<Stock> getStocks() {
+    public List<Stock> getAllStocks() {
         return stockRepository.findAll();
     }
 
     public Stock getStockById(ObjectId id){
         return stockRepository.findById(id)
             .orElse(null);
+    }
+
+    public Stock getStockBySymbol(String symbol){
+        return stockRepository.getStockBySymbol(symbol);
     }
 }

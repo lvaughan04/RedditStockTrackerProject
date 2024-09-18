@@ -6,4 +6,5 @@ import com.lvclones.RedditStockTracker.models.Stock;
 
 public interface StockRepository extends MongoRepository<Stock, ObjectId>{
 
+    public Stock getStockBySymbol(String symbol);
 }

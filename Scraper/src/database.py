@@ -1,4 +1,4 @@
-from pymongo import MongoClient, ASCENDING, errors
+from pymongo import MongoClient, errors
 import certifi
 from config import CONNECTION_STRING
     
@@ -7,31 +7,51 @@ def setup_database():
         client = MongoClient(CONNECTION_STRING, tlsCAFile=certifi.where())
         db = client["StockData"]
 
+        print(client.server_info()["version"])
+
+        # for doc in db["Posts"].find({}, {"timestamp": 1}):
+        #     print(doc)
+        
         # Ensure the Posts collection exists before initializing the collections
         if "Posts" not in db.list_collection_names():
             db.create_collection(
                 "Posts",
                 timeseries={
                     "timeField": "timestamp",  
-                    "metaField": "stock_symbol",   
-                    "granularity": "hours"     
+                    "metaField": "metadata",   
+                    "granularity": "hours"
                 }
             )
+
+            db["Posts"].create_index(
+            [("timestamp", 1)],  
+            expireAfterSeconds=20, 
+            partialFilterExpression={"metadata": {"$exists": True}} 
+        )
             print("Time series collection 'Posts' created.")
         else:
             print("Time series collection 'Posts' already exists.")
 
+        indexes = db["Posts"].index_information()
+
+        for index in indexes.values():
+            print(index)
+
+        # Alternatively, you can check for a specific TTL index on the "timestamp" field:
+        ttl_index_exists = False
+
+        for index in indexes.values():
+            if index.get("key") == [("timestamp", 1)] and index.get("expireAfterSeconds") == 20:
+                ttl_index_exists = True
+                print("TTL index exists and is correctly configured.")
+                break
+
+        if not ttl_index_exists:
+            print("TTL index does not exist or is misconfigured.")
+
         # Initialize the collections after ensuring they exist
         SP_COLLECTION = db["SP500"]
         POSTS_COLLECTION = db["Posts"]
-
-        # Ensure the TTL index exists
-        db["Posts"].create_index(
-            [("timestamp", ASCENDING)],
-            expireAfterSeconds=86400,  # 24 hours = 86400 seconds
-            partialFilterExpression={"stock_symbol": {"$exists": True}}
-        )
-        print("TTL index created or verified.")
 
         return SP_COLLECTION, POSTS_COLLECTION
 

@@ -19,13 +19,18 @@ public class StockController {
     }
 
     @QueryMapping
-    public List<Stock> getStocks(){
-        return stockService.getStocks();
+    public List<Stock> getAllStocks(){
+        return stockService.getAllStocks();
     }
 
     @QueryMapping
     public Stock getStockById(@Argument String id){
         return stockService.getStockById( new ObjectId(id));
+    }
+
+    @QueryMapping
+    public Stock getStockBySymbol(@Argument String symbol){
+        return stockService.getStockBySymbol(symbol);
     }
 
     
