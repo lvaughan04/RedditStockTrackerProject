@@ -1,0 +1,19 @@
+virtualenv/
+.virtualenv/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs
+*.log
+
+# Ignore git files and directories
+.git
+.gitignore
+
+# Ignore IDE or editor files
+.vscode/
+.idea/

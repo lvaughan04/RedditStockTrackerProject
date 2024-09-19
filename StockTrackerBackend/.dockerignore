@@ -1,0 +1,25 @@
+# # Ignore Maven build output
+# target/
+
+# Ignore Maven wrapper files if you don’t need them in the container
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ignore temporary files and directories
+*.log
+*.tmp
+*.bak
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore git and version control files
+.git
+.gitignore
